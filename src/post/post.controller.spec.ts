@@ -4,12 +4,16 @@ import { PostService } from './post.service'
 
 describe('PostController', () => {
   let controller: PostController
+  const mockPostService = {}
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [PostController],
       providers: [PostService],
-    }).compile()
+    })
+      .overrideProvider(PostService)
+      .useValue(mockPostService)
+      .compile()
 
     controller = module.get<PostController>(PostController)
   })
