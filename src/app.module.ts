@@ -5,11 +5,17 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { UserModule } from './user/user.module'
 import { PostModule } from './post/post.module'
+import { User } from './user/entities/user.entity'
+import { Post } from './post/entities/post.entity'
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({ type: 'mysql', url: process.env.DATABASE_URL }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      url: process.env.DATABASE_URL,
+      entities: [User, Post],
+    }),
     UserModule,
     PostModule,
   ],
